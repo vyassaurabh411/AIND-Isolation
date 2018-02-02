@@ -34,7 +34,6 @@ def custom_score(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-    # TODO: finish this function!
     my_moves = float(len(game.get_legal_moves(player)))
     return my_moves
 
@@ -61,8 +60,11 @@ def custom_score_2(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-    # TODO: finish this function!
-    raise NotImplementedError
+    my_moves = float(len(game.get_legal_moves(player)))
+    opp_moves = float(len(game.get_legal_moves(game.get_opponent(player))))
+    loss_fn = my_moves - opp_moves
+    return loss_fn
+
 
 
 def custom_score_3(game, player):
@@ -87,8 +89,9 @@ def custom_score_3(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-    # TODO: finish this function!
-    raise NotImplementedError
+    opp_moves = float(len(game.get_legal_moves(game.get_opponent(player))))
+    loss_fn =  -opp_moves
+    return loss_fn
 
 
 class IsolationPlayer:
@@ -241,8 +244,6 @@ class MinimaxPlayer(IsolationPlayer):
             for a in game.get_legal_moves():
                     v = max(v, self.min_value(game.forecast_move(a), depth-1))
             return v
-
-
 
 
 class AlphaBetaPlayer(IsolationPlayer):
