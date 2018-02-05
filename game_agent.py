@@ -89,8 +89,9 @@ def custom_score_3(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
+    my_moves = float(len(game.get_legal_moves(player)))
     opp_moves = float(len(game.get_legal_moves(game.get_opponent(player))))
-    loss_fn =  -opp_moves
+    loss_fn =  my_moves - 0.5*opp_moves
     return loss_fn
 
 
