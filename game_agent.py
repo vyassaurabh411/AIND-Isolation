@@ -3,6 +3,7 @@ test your agent's strength against a set of known agents using tournament.py
 and include the results in your report.
 """
 import random
+import math
 
 
 class SearchTimeout(Exception):
@@ -35,7 +36,18 @@ def custom_score(game, player):
         The heuristic value of the current game state to the specified player.
     """
     my_moves = float(len(game.get_legal_moves(player)))
-    return my_moves
+    opp_moves = float(len(game.get_legal_moves(game.get_opponent(player))))
+
+
+    def distance_center(game, move):
+         x, y = move
+         center_x, center_y =  (math.ceil(game.width / 2), math.ceil(game.height / 2))
+         distance = float(((center_x - x)**2 + (center_y - y)**2)**0.5)
+         max_distance = float(((center_x - game.width)**2 + (center_y - game.height)**2)**0.5)
+         return float(distance/max_distance)
+
+    loss_fn = my_moves - opp_moves - distance_center(game, game.get_player_location(player))
+    return loss_fn
 
 
 def custom_score_2(game, player):
