@@ -35,9 +35,10 @@ def custom_score(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
+
+
     my_moves = float(len(game.get_legal_moves(player)))
     opp_moves = float(len(game.get_legal_moves(game.get_opponent(player))))
-
 
     def distance_center(game, move):
          x, y = move
