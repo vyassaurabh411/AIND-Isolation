@@ -75,7 +75,7 @@ def custom_score_2(game, player):
     """
     my_moves = float(len(game.get_legal_moves(player)))
     opp_moves = float(len(game.get_legal_moves(game.get_opponent(player))))
-    loss_fn = my_moves - opp_moves
+    loss_fn = my_moves - (opp_moves)**0.5
     return loss_fn
 
 
